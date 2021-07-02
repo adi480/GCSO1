@@ -17,6 +17,7 @@ function setup() {
 
 function draw() {
   background(0);  
+  car.Collide(wall);
 
   if(wall.x - car.x < (car.width + wall.width)/2){
       car.velocityX = 0;
