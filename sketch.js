@@ -1,51 +1,37 @@
 
-var car,wall;
-var speed,weight;
+var car, wall, speed, weight;
 
-function setup() 
-{
-createCanvas(1600,400);
-background("black");
- 
-speed=random(223,321);
-weight=random(30,52);
+function setup() {
+  createCanvas(1200,400);
 
+  speed = random(55,90);
+  weight = random(400,1500);
 
-car=createSprite(50, 200, 50, 50);
-wall=createSprite(1200,200,height/2);
-wall.shapeColor="gray";
+  car = createSprite(50, 200, 50, 50);
+  car.velocityX = speed;
+  car.shapeColor = "white";
 
-car.velocityX = speed;
+  wall = createSprite(1100,200,60,height/2);
+  wall.shapeColor = color(80,80,80);
 }
 
 function draw() {
-  background("white");  
- 
+  background(0);  
 
-  if(hasCollided(car,wall)){
-    car.velocityX=0;
-    var damage = 0.5*weight*speed*speed/22509;
-    if(damage>10){
-      wall.shapeColor="red";
-    }
-    if(damage<10){
-      wall.shapeColor="green";
-    }
-     
-    }
-  
-  
-  drawSprites();
-}
+  if(wall.x - car.x < (car.width + wall.width)/2){
+      car.velocityX = 0;
 
-function hasCollided(car1,wall1){
-    
-  carRightEdge=car1.x +car1.width;
-  wallLeftEdge=wall1.x;
-  if (carRightEdge>=wallLeftEdge)
-  {
-      return true
+    var deformation = (0.5 * wieght * speed * speed)/22500;
+    if(deformation < 80){
+      car.shapeColor = "green";
+    }
+    if(deformation > 80 && deformation < 180){
+      car.shapeColor = color(230,230,0);
+    }
+    if(deformation > 180){
+      car.shapeColor = "red";
+    }
   }
-  return false;
 
+  drawSprites();
 }
